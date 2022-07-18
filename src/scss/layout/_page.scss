@@ -1,3 +1,67 @@
-.anime-fav{
+.main{
+    height: 85%;
+    &__form{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin-top: 30px;
+        &--label{
+            margin: 8px 0 50px 20px;
+            font-size: 18px;
+        }
+        &--input{
+            margin: 0 70px 30px 20px;
+            padding: 5px;
+            border-radius: 7px;
+
+        }
+        &--search{
+            margin: 0 70px 30px 20px;
+            width: 80px;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 5px;
+
+        }
+        &--reset{
+            margin: 0 70px 30px 20px;
+            width: 80px;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 5px;
+
+        }
+    }
+    &__section{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-left: 40px;
+        &--favlist{
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        &--resultlist{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 20px;
+        }
+    }
+}
+.anime{
+    margin-top: 20px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &-fav{
     background-color: red;
+    }
+    &__title{
+        font-size: 30px;
+
+    }
+    &__cover{
+        height: 300px;
+    }
 }

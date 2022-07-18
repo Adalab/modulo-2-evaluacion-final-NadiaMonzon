@@ -1,15 +1,23 @@
-<main>
-  <form action="">
-    <label for="title">¡Escribe el nombre de tu anime favorito!</label>
-    <input type="text" name="title" placeholder="Ej: Naruto" class="text-input js_input">
-    <button class="search-btn js_search-btn">Buscar</button>
-    <button class="reset-btn js_reset-btn">Reset</button>
+<main class="main">
+  <form action="" class="main__form">
+    <label for="title" class="main__form--label">¡Escribe el nombre de tu anime favorito!</label>
+    <input type="text" name="title" placeholder="Ej: Neon Genesis Evangelion" class="main__form--input js_input">
+    <button class="main__form--search js_search-btn">Buscar</button>
+    <button class="main__form--reset js_reset-btn">Reset</button>
   </form>
-  <section class="">
-    <ul class="fav-list js_fav">
-      <li class="anime js_fav-anime"></li>
-    </ul>
-    <ul class="js_result">
-    </ul>
+  <section class="main__section">
+    <article class="container-fav">
+      <h3>Tus animes favoritos</h3>
+      <ul class="main__section--favlist js_fav">
+      
+        <li class="anime js_fav-anime"></li>
+      </ul>
+    </article>
+    <article class="container-results">
+      <h3>Resultados de la búsqueda</h3>
+      <ul class="main__section--resultlist js_result">
+      </ul>
+      
+    </article>
   </section>
 </main>
