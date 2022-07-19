@@ -76,7 +76,7 @@ function listenerAnimes () {
 function handleSearch(event) {
     event.preventDefault();
     if (inputFilter.value === '') {
-        resultsList.innerHTML = '';
+        resultsList.innerHTML = '¡Recuerda escribir algo en el buscador!';
     } else {
         callApiData()
     }
