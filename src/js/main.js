@@ -54,11 +54,12 @@ function renderFavAnimes (){
     for (const oneFavAnime of favAnimes) {
         favAnimeHTML += `<li class="anime js_anime" id="${oneFavAnime.mal_id}">`
         favAnimeHTML += `<h2 class="anime__title">${oneFavAnime.title}</h2>`
-        
+        favAnimeHTML += `<i class="fa-regular fa-circle-xmark fa-xl"></i>`
         if(oneFavAnime.images.jpg.image_url === brokenImg){
             oneFavAnime.images.jpg.image_url = newImg
         }
-        favAnimeHTML +=`<img class="anime__cover" src="${oneFavAnime.images.jpg.image_url}" alt="Cover of ${oneFavAnime.title} "> </li>`
+        favAnimeHTML +=`<img class="anime__cover" src="${oneFavAnime.images.jpg.image_url}" alt="Cover of ${oneFavAnime.title} "> </li> `
+        
     }
     favList.innerHTML = favAnimeHTML
     listenerAnimes()
@@ -98,6 +99,12 @@ function handleClick (ev) {
     renderFavAnimes();
     renderAnimes(); 
 }
+
+function resetData () {
+    localStorage.removeItem('data')
+}
+
+resetBtn.addEventListener('click', resetData)
 
 function onLoad () {
     const dataLS = JSON.parse(localStorage.getItem('data'))

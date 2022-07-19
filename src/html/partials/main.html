@@ -3,8 +3,29 @@
     <label for="title" class="main__form--label">¡Escribe el nombre de tu anime favorito!</label>
     <input type="text" name="title" placeholder="Ej: Neon Genesis Evangelion" class="main__form--input js_input">
     <button class="main__form--search js_search-btn">Buscar</button>
-    <button class="main__form--reset js_reset-btn">Reset</button>
+    <button class="main__form--reset js_reset-btn open-modal" data-open="modal1">Borrar tus favoritos</button>
   </form>
+
+<!-- modal tomado de https://codepen.io/tutsplus/pen/vqRXPv   -->
+
+  <!-- <div class="modal" id="modal1" data-animation="slideInOutLeft">
+    <div class="modal-dialog">
+      <header class="modal-header">
+        ¿Estás segura de que quieres borrar toda tu lista de animes favoritos?
+        <button class="close-modal" aria-label="close modal" data-close>
+          ✕  
+        </button>
+      </header>
+      <section class="modal-content">
+        <p><strong>Presiona ✕, ESC, o click por fuera de la ventana para cerrarla</strong></p>
+        <button>Borrar</button>
+        <button>Cancelar</button>
+      </section>
+    </div>
+  </div> -->
+
+  <!-- fin del modal   -->
+
   <section class="main__section">
     <article class="container-fav">
       <h3>Tus animes favoritos</h3>
