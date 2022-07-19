@@ -11,7 +11,7 @@ body{
         margin-top: 30px;
         &--label{
             margin: 8px 0 50px 40px;
-            font-size: 18px;
+            font-size: 23px;
             display: flex;
             justify-content: center;
             padding-top: 6px;
@@ -69,7 +69,6 @@ body{
         color: #8795e8;
         border: 5px #A2D2FF;
         font-size: 25px;
-
     }
 }
 .anime{
@@ -86,6 +85,7 @@ body{
     &__title{
         font-size: 30px;
         text-align: center;
+        
 
     }
     &__cover{
