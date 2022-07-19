@@ -14,10 +14,20 @@ const newImg = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
 let animes = [];
 let favAnimes = [];
 
+const callApiData = () => {
+    const inputValue = inputFilter.value.toLowerCase();
+    fetch (`https://api.jikan.moe/v4/anime?q=${inputValue}`)
+        .then((response) => response.json ())
+        .then ((data) =>{
+            animes = data.data;
+            console.log(animes);
+            renderAnimes();
+        })
+}
+
 function renderAnimes (){
     let animeHTML = ''
     let favClass = ''
-
     for (const oneAnime of animes) {
         const favAnimeFoundIndex = favAnimes.findIndex ((fav) => oneAnime.mal_id === fav.mal_id)
         if (favAnimeFoundIndex !== -1){
@@ -37,16 +47,18 @@ function renderAnimes (){
     resultsList.innerHTML = animeHTML
     listenerAnimes();
 }
+
 function renderFavAnimes (){
     let favAnimeHTML = ''
-    for (const favOneAnime of favAnimes) {
-        favAnimeHTML += `<li class="anime js_anime" id="${favOneAnime.mal_id}">`
-        favAnimeHTML += `<h2 class="anime__title">${favOneAnime.title}</h2>`
+
+    for (const oneFavAnime of favAnimes) {
+        favAnimeHTML += `<li class="anime js_anime" id="${oneFavAnime.mal_id}">`
+        favAnimeHTML += `<h2 class="anime__title">${oneFavAnime.title}</h2>`
         
-        if(favOneAnime.images.jpg.image_url === brokenImg){
-            favOneAnime.images.jpg.image_url = newImg
+        if(oneFavAnime.images.jpg.image_url === brokenImg){
+            oneFavAnime.images.jpg.image_url = newImg
         }
-        favAnimeHTML +=`<img class="anime__cover" src="${favOneAnime.images.jpg.image_url}" alt="Cover of ${favOneAnime.title} "> </li>`
+        favAnimeHTML +=`<img class="anime__cover" src="${oneFavAnime.images.jpg.image_url}" alt="Cover of ${oneFavAnime.title} "> </li>`
     }
     favList.innerHTML = favAnimeHTML
     listenerAnimes()
@@ -60,57 +72,32 @@ function listenerAnimes () {
     }
 }
 
-const callApiData = () => {
-    const inputValue = inputFilter.value.toLowerCase();
-    fetch (`https://api.jikan.moe/v4/anime?q=${inputValue}`)
-        .then((response) => response.json ())
-        .then ((data) =>{
-            animes = data.data;
-            localStorage.setItem('data', JSON.stringify(animes))
-            renderAnimes();
-        })
-}
+function handleSearch(event) {
+    event.preventDefault();
+    if (inputFilter.value === '') {
+        resultsList.innerHTML = '';
+    } else {
+        callApiData()
+    }
+  }
 
-
-const handleSearch = () =>{
-    const inputValue = inputFilter.value.toLowerCase();
-    const animesFiltered = animes.filter((anime) =>
-    anime.title.toLowerCase().includes(inputValue));
-    renderAnimes(animesFiltered)
-    
-}
-
-inputFilter.addEventListener('keyup', handleSearch)
+searchBtn.addEventListener('click', handleSearch)
 
 function handleClick (ev) {
     ev.preventDefault();
     const animeID = parseInt(ev.currentTarget.id)
     const animeFound = animes.find((anime) => anime.mal_id === animeID)
     const favAnimeFound = favAnimes.findIndex((fav) => fav.mal_id === animeID)
-
     if (favAnimeFound === -1){
         favAnimes.push(animeFound)
     }
     else{
         favAnimes.splice(favAnimeFound, 1)
     }
+    localStorage.setItem('data', JSON.stringify(favAnimes))
     renderFavAnimes();
-    renderAnimes();
-    
+    renderAnimes(); 
 }
-callApiData()
-
-// function handleClickSearch(event) {
-//     event.preventDefault();
-//     if (inputFilter.value === '') {
-//         resultsList.innerHTML = '';
-//     } else {
-//         callApiData()
-//     }
-//   }
-
-// searchBtn.addEventListener('click', handleClickSearch)
-
 
 function onLoad () {
     const dataLS = JSON.parse(localStorage.getItem('data'))
@@ -118,7 +105,9 @@ function onLoad () {
         favAnimes = dataLS;
         renderFavAnimes();
     }
+    else{
+        favList.innerHTML = ''
+    }
 }
 
 onLoad ()
-
