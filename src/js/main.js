@@ -7,6 +7,7 @@ const resetBtn = document.querySelector('.js_reset-btn');
 const resultsList = document.querySelector('.js_result');
 const favList = document.querySelector('.js_fav');
 const animeItem = document.querySelector('.js_anime');
+const logBtn = document.querySelector('.js-log-btn');
 
 const brokenImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
 const newImg = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
@@ -42,7 +43,8 @@ function renderAnimes (){
         if(oneAnime.images.jpg.image_url === brokenImg){
             oneAnime.images.jpg.image_url = newImg
         }
-        animeHTML +=`<img class="anime__cover" src="${oneAnime.images.jpg.image_url}" alt="Cover of ${oneAnime.title} "> </li>`
+        animeHTML +=`<img class="anime__cover" src="${oneAnime.images.jpg.image_url}" alt="Cover of ${oneAnime.title} "`
+        animeHTML += `<p> ${oneAnime.type} </li>`
     }
     resultsList.innerHTML = animeHTML
     listenerAnimes();
@@ -58,12 +60,23 @@ function renderFavAnimes (){
         if(oneFavAnime.images.jpg.image_url === brokenImg){
             oneFavAnime.images.jpg.image_url = newImg
         }
-        favAnimeHTML +=`<img class="anime__cover" src="${oneFavAnime.images.jpg.image_url}" alt="Cover of ${oneFavAnime.title} "> </li> `
+        favAnimeHTML +=`<img class="anime__cover" src="${oneFavAnime.images.jpg.image_url}" alt="Cover of ${oneFavAnime.title} ">  `
+        favAnimeHTML += `<p> ${oneFavAnime.type} </li>`
         
     }
     favList.innerHTML = favAnimeHTML
     listenerAnimes()
 }
+
+function handleLog (ev) {
+    ev.preventDefault();
+    for (const logAnime of favAnimes) {
+        console.log(logAnime.title);
+    }
+
+}
+
+logBtn.addEventListener('click', handleLog)
 
 
 function listenerAnimes () {
